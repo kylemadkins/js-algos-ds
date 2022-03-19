@@ -15,6 +15,22 @@ function isAnagram(str1, str2) {
   return true;
 }
 
+function betterIsAnagram(str1, str2) {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+  const lookup = countLetters(str1);
+  for (let i = 0; i < str2.length; i++) {
+    let letter = str2[i];
+    if (!lookup[letter]) {
+      return false;
+    } else {
+      lookup[letter] -= 1;
+    }
+  }
+  return true;
+}
+
 function countLetters(str) {
   const letters = {};
   for (let i = 0; i < str.length; i++) {
@@ -28,10 +44,10 @@ function countLetters(str) {
   return letters;
 }
 
-console.log("", "", isAnagram("", "")); // true
-console.log("aaz", "zza", isAnagram("aaz", "zza")); // false
-console.log("anagram", "nagaram", isAnagram("anagram", "nagaram")); // true
-console.log("rat", "car", isAnagram("rat", "car")); // false
-console.log("awesome", "awesom", isAnagram("awesome", "awesom")); // false
-console.log("qwerty", "qeywrt", isAnagram("qwerty", "qeywrt")); // true
-console.log("texttwisttime", "timetwisttext", isAnagram("texttwisttime", "timetwisttext")); // true
+console.log("", "", betterIsAnagram("", "")); // true
+console.log("aaz", "zza", betterIsAnagram("aaz", "zza")); // false
+console.log("anagram", "nagaram", betterIsAnagram("anagram", "nagaram")); // true
+console.log("rat", "car", betterIsAnagram("rat", "car")); // false
+console.log("awesome", "awesom", betterIsAnagram("awesome", "awesom")); // false
+console.log("qwerty", "qeywrt", betterIsAnagram("qwerty", "qeywrt")); // true
+console.log("texttwisttime", "timetwisttext", betterIsAnagram("texttwisttime", "timetwisttext")); // true
